@@ -167,6 +167,7 @@ local function set_lsp_hl()
 end
 
 local function set_treesitter_hl()
+  ln("@constructor", "Ignore")
   hi("@markup.heading", { fg = colors.emphasis, bold = true })
   hi("@markup.list.markdown", { fg = colors.accent, bold = true })
 end
