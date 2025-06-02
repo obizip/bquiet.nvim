@@ -68,12 +68,12 @@ local function set_native_hl()
 
   link_all({
     "Title", "Type", "Statement", 'Identifier', 'Macro', 'Repeat', 'StorageClass', 'Structure', 'Tag', 'Typedef',
-    'Exception', "Terminal", 'Function'
+    'Exception', "Terminal", 'Function', 'Special'
   }, "Normal")
 
 
   link_all({
-    'Float', 'Number', 'SpecialChar', 'Special', 'String', 'Boolean', 'Character', 'SpecialComment'
+    'Float', 'Number', 'SpecialChar', 'String', 'Boolean', 'Character', 'SpecialComment'
   }, "Constant")
 
   link_all({
