@@ -23,8 +23,8 @@ local colors = {
   constant = "#8D8CD8",
   comment = "#33994E",
   accent = "#89AFD6",
-  normal = "#EEEEEE",
-  background = "#000000",
+  foreground = "#EEEEEE",
+  background = "#14161B",
   emphasis = "#FFAF00",
   unimportant = "#999999",
   nontext = "#555555",
@@ -32,12 +32,14 @@ local colors = {
   info = "#00B06B",
   warn = "#F6AA00",
   error = "#FF4B00",
-  highlighted_background = "#3b3b3b",
+  highlighted_background = "#20242B",
 
   -- UI elements
   -- background = 'bg_0',
   ui_dim_background = '#252525',
-  ui_background = '#111111',
+  -- ui_background = '#111111',
+  ui_background = '#21222B',
+
   visual = '#444444',
   cursor = '#b9b9b9',
   lens = '#4f9cfe',
@@ -46,7 +48,6 @@ local colors = {
   ui_widget = '#70b433',
   ui_highlight = '#a580e2',
   ui_extra_highlight = '#3fc5b7',
-  sign_column = '#101010',
 
   -- Status elements
   added = "#00B06B",
@@ -55,16 +56,17 @@ local colors = {
 }
 
 local function set_native_hl()
-  hi("Normal", { fg = colors.normal })
+  hi("Normal", { fg = colors.foreground })
   hi("Comment", { fg = colors.comment })
   hi("Constant", { fg = colors.constant })
   hi('Ignore', { fg = colors.unimportant })
   hi('Operator', { fg = colors.accent })
   hi('Debug', { fg = colors.warn })
   hi('Error', { fg = colors.error })
-  hi('Underlined', { fg = colors.normal, underline = true })
+  hi('Underlined', { fg = colors.foreground, underline = true })
   hi('Todo', { fg = colors.highlighted_background, bg = colors.warn, bold = true })
   hi("NonText", { fg = colors.nontext })
+  hi("EndOfBuffer", { fg = colors.nontext })
 
   link_all({
     "Title", "Type", "Statement", 'Identifier', 'Macro', 'Repeat', 'StorageClass', 'Structure', 'Tag', 'Typedef',
@@ -81,7 +83,7 @@ local function set_native_hl()
   }, "Ignore")
 
   link_all({
-    "EndOfBuffer", "Conceal"
+    "Conceal"
   }, "NonText")
 
   -- messages
@@ -110,14 +112,14 @@ local function set_native_hl()
 
   -- cursor
   hi('ColorColumn', { bg = colors.ui_extra_highlight })
-  hi('CursorColumn', { bg = colors.ui_background })
+  hi('CursorColumn', { bg = colors.highlighted_background })
   ln('CursorLine', 'CursorColumn')
   hi('Cursor', { bg = colors.cursor })
   ln('CursorIM', 'Cursor')
   ln('lCursor', 'Cursor')
   hi('LineNr', { fg = colors.ui_dim_text })
-  hi('CursorLineNr', { fg = colors.ui_widget })
-  hi('SignColumn', { bg = colors.sign_column })
+  hi('CursorLineNr', { fg = colors.foreground, bold = true })
+  hi('SignColumn', {})
 
   -- visual
   hi('Visual', { bg = colors.visual })
