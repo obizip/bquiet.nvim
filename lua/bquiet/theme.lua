@@ -112,7 +112,8 @@ local function set_native_hl()
 
   -- cursor
   hi('ColorColumn', { bg = colors.ui_extra_highlight })
-  hi('CursorColumn', { bg = colors.highlighted_background })
+  -- hi('CursorColumn', { bg = colors.highlighted_background })
+  hi('CursorColumn', {})
   ln('CursorLine', 'CursorColumn')
   hi('Cursor', { bg = colors.cursor })
   ln('CursorIM', 'Cursor')
