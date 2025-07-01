@@ -140,7 +140,7 @@ local function set_native_hl()
   hi('Search', { fg = colors.emphasis })
   hi('CurSearch', { fg = colors.emphasis, reverse = true })
   ln('IncSearch', "Search")
-  hi('MatchParen', { fg = colors.operator, bg = colors.highlighted_background })
+  hi('MatchParen', { fg = colors.emphasis, bg = colors.highlighted_background })
 
   -- diagnostics
   hi('SpellBad', { fg = colors.warning, bg = colors.highlighted_background, underline = true })
@@ -173,6 +173,7 @@ local function set_treesitter_hl()
   ln("@constructor", "Ignore")
   hi("@markup.heading", { fg = colors.emphasis, bold = true })
   hi("@markup.list.markdown", { fg = colors.accent, bold = true })
+  hi("@tag", { fg = colors.accent })
 end
 
 local function set_plugin_hl()
