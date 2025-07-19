@@ -166,7 +166,7 @@ local function set_lsp_hl()
   hi("DiagnosticHint", { fg = colors.hint, bold = true })
   hi("DiagnosticInfo", { fg = colors.info, bold = true })
   hi("DiagnosticWarn", { fg = colors.warn, bold = true })
-  hi("DiagnosticError", { fg = colors.error, bold = true })
+  ln("@lsp.type", { fg = colors.constant, bold = true })
 end
 
 local function set_treesitter_hl()
