@@ -174,6 +174,7 @@ local function set_treesitter_hl()
   hi("@markup.heading", { fg = colors.emphasis, bold = true })
   hi("@markup.list.markdown", { fg = colors.accent, bold = true })
   hi("@tag", { fg = colors.accent })
+  hi("@type", { fg = colors.constant })
 end
 
 local function set_plugin_hl()
