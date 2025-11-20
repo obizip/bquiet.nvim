@@ -1,1 +1,1 @@
-require("bquiet").setup()
+require("bquiet").load()

@@ -1,0 +1,165 @@
+local M = {}
+
+function M.setup(colors, opts)
+  local hl_table = {}
+  for k, v in pairs(M.get(colors, opts)) do
+    hl_table[k] = v
+  end
+  opts.on_highlights(hl_table, colors)
+
+  return hl_table
+end
+
+function M.get(c, opts)
+  return {
+    Exception                   = { fg = c.keyword },
+    Comment                     = { fg = c.comment },
+    ColorColumn                 = {},
+    Conceal                     = {},
+    Cursor                      = { fg = c.bg, bg = c.fg },
+    lCursor                     = { fg = c.bg, bg = c.fg },
+    CursorIM                    = { fg = c.bg, bg = c.fg },
+    CursorColumn                = {},
+    CursorLine                  = {},
+    Directory                   = { fg = c.strong4 },
+    DiffAdd                     = { bg = c.diff.add },
+    DiffChange                  = { bg = c.diff.change },
+    DiffDelete                  = { bg = c.diff.delete },
+    DiffText                    = { bg = c.diff.text },
+    EndOfBuffer                 = { fg = c.delimiter },
+    ErrorMsg                    = { fg = c.diag.error },
+    VertSplit                   = { fg = c.fg_border },
+    WinSeparator                = { fg = c.fg_border, bold = true },
+    Folded                      = { fg = c.strong4, bg = c.fg_gutter },
+    FoldColumn                  = { bg = opts.transparent and c.none or c.bg, fg = c.comment },
+    SignColumn                  = { bg = opts.transparent and c.none or c.bg, fg = c.fg_gutter },
+    Substitute                  = { bg = c.bg_visual },
+    LineNr                      = { fg = c.fg_gutter },
+    CursorLineNr                = { fg = c.strong1, bold = true },
+    LineNrAbove                 = { fg = c.fg_gutter },
+    LineNrBelow                 = { fg = c.fg_gutter },
+    MatchParen                  = { fg = c.strong1, bold = true },
+    ModeMsg                     = { fg = c.fg, bold = true },
+    MsgAren                     = { fg = c.fg },
+    MoreMsg                     = { fg = c.strong4 },
+    NonText                     = { fg = c.weak1 },
+    Normal                      = { fg = c.fg, bg = opts.transparent and c.none or c.bg },
+    NormalNC                    = {},
+    NormalSB                    = {},
+    NormalFloat                 = {},
+    FloatBorder                 = { fg = c.fg_border },
+    FloatTitle                  = {},
+    Pmenu                       = {},
+    -- PmenuMatch                  = { bg = c.bg_popup, fg = c.strong4 },
+    PmenuSel                    = { fg = c.bg, bg = c.active },
+    PmenuMatchSel               = { fg = c.bg, bg = c.active },
+    PmenuSbar                   = { bg = c.bg_popup },
+    PmenuThumb                  = { bg = c.fg_gutter },
+    Question                    = { fg = c.strong4 },
+    QuickFixLine                = { bg = c.bg_visual, bold = true },
+    Repeat                      = { fg = c.keyword },
+    Search                      = { bg = c.bg_search },
+    IncSearch                   = { bg = c.strong1, fg = c.bg },
+    CurSearch                   = "IncSearch",
+    SpecialKey                  = { fg = c.weak1 },
+    SpellBad                    = { sp = c.diag.error, undercurl = true },
+    SpellCap                    = { sp = c.diag.warn, undercurl = true },
+    SpellLocal                  = { sp = c.diag.info, undercurl = true },
+    SpellRare                   = { sp = c.diag.hint, undercurl = true },
+    StatusLine                  = { fg = c.fg_sidebar, bg = c.bg_statusline },
+    StatusLineNC                = { fg = c.fg_gutter, bg = c.bg_statusline },
+    TabLine                     = { bg = c.bg_statusline, fg = c.fg_gutter },
+    TabLineFill                 = { bg = opts.transparent and c.none or c.weak1 },
+    TabLineSel                  = { fg = c.weak1, bg = c.strong4 },
+    Title                       = { fg = c.strong4, bold = true },
+    Visual                      = { bg = c.bg_visual },
+    VisualNOS                   = { bg = c.bg_visual },
+    warnMsg                     = { fg = c.diag.warn },
+    Whitespace                  = { fg = c.fg_gutter },
+    WildMenu                    = { bg = c.bg_visual },
+    WinBar                      = "StatusLine",
+    WinBarNC                    = "StatusLineNC",
+
+    Bold                        = { bold = true, fg = c.fg },
+    Character                   = { fg = c.constant },
+    Constant                    = { fg = c.constant },
+    Conditional                 = { fg = c.keyword },
+    Debug                       = { fg = c.strong1 },
+    Delimiter                   = { fg = c.delimiter },
+    Error                       = { fg = c.diag.error },
+    Function                    = {},
+    Identifier                  = {},
+    Italic                      = { italic = true, fg = c.fg },
+    Keyword                     = { fg = c.keyword, italic = true },
+    Label                       = { fg = c.keyword },
+    Operator                    = { fg = c.operator },
+    PreProc                     = {},
+    Include                     = { fg = c.keyword },
+    Define                      = { fg = c.keyword },
+    PreCondit                   = { fg = c.keyword },
+    Special                     = {},
+    Statement                   = {},
+    String                      = { fg = c.constant },
+    Todo                        = { bg = c.strong2, fg = c.bg },
+    Type                        = { fg = c.type, bold = true },
+    Underlined                  = { underline = true },
+    debugBreakpoint             = { fg = c.diag.info },
+    debugPC                     = {},
+    dosIniLabel                 = "@property",
+    helpCommand                 = { bg = c.weak1, fg = c.strong4 },
+    htmlH1                      = { fg = c.strong3, bold = true },
+    htmlH2                      = { fg = c.strong4, bold = true },
+    qfFileName                  = { fg = c.strong4 },
+    qfLineNr                    = { fg = c.weak1 },
+
+    LspReferenceText            = { bg = c.fg_gutter },
+    LspReferenceRead            = { bg = c.fg_gutter },
+    LspReferenceWrite           = { bg = c.fg_gutter },
+    LspSignatureActiveParameter = { bg = c.bg_visual, bold = true },
+    LspCodeLens                 = { fg = c.comment },
+    LspInlayHint                = { bg = c.strong4, fg = c.weak1 },
+    LspInfoBorder               = { fg = c.fg_popup, bg = c.bg_float },
+    ComplHint                   = { fg = c.weak1 },
+
+    DiagnosticError             = { fg = c.diag.error },
+    DiagnosticWarn              = { fg = c.diag.warn },
+    DiagnosticInfo              = { fg = c.diag.info },
+    DiagnosticHint              = { fg = c.diag.hint },
+    DiagnosticUnnecessary       = {},
+    DiagnosticVirtualTextError  = { fg = c.diag.error },
+    DiagnosticVirtualTextWarn   = { fg = c.diag.warn },
+    DiagnosticVirtualTextInfo   = { fg = c.diag.info },
+    DiagnosticVirtualTextHint   = { fg = c.diag.hint },
+    DiagnosticUnderlineError    = { undercurl = true, sp = c.diag.error },
+    DiagnosticUnderlineWarn     = { undercurl = true, sp = c.diag.warn },
+    DiagnosticUnderlineInfo     = { undercurl = true, sp = c.diag.info },
+    DiagnosticUnderlineHint     = { undercurl = true, sp = c.diag.hint },
+
+    healthError                 = { fg = c.diag.error },
+    healthSuccess               = { fg = c.success },
+    healthwarn                  = { fg = c.diag.warn },
+
+    diffAdded                   = { bg = c.diff.add, fg = c.git.add },
+    diffRemoved                 = { bg = c.diff.delete, fg = c.git.delete },
+    diffChanged                 = { bg = c.diff.change, fg = c.git.change },
+    diffOldFile                 = { fg = c.strong4, bg = c.diff.delete },
+    diffNewFile                 = { fg = c.strong4, bg = c.diff.add },
+    diffFile                    = { fg = c.strong4 },
+    diffLine                    = { fg = c.comment },
+    diffIndexLine               = { fg = c.strong3 },
+    helpExample                 = { fg = c.comment },
+
+    --
+    -- Plugins
+    --
+
+    -- Treesitter
+    ["@type"]                   = "Type",
+    ["@type.builtin"]           = "Type",
+
+    -- Telescope
+    TelescopeMatching           = { fg = c.active }
+  }
+end
+
+return M
