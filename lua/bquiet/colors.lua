@@ -10,9 +10,10 @@ local light_colors = {
 
     secondary1 = "#696969",
     secondary2 = "#888888",
+    secondary3 = "#a0a0a0",
   },
   background = {
-    normal = "#E2E2E9",
+    normal = "#f2f2fa",
 
     primary1 = "#A85A00",
     primary2 = "#C0C0C0",
@@ -61,7 +62,7 @@ local dark_colors = {
 
     secondary1 = "#C0C0C0",
     secondary2 = "#999999",
-    secondary3 = "#3b4261",
+    secondary3 = "#162022",
   },
   background = {
     normal = "#0e1415",
@@ -129,14 +130,14 @@ function M.setup(opts)
   colors.bg_search = colors.background.primary2
   colors.bg_statusline = colors.background.secondary2
 
-  colors.success = colors.ansi.green
+  colors.weak1 = colors.foreground.secondary3
 
   colors.strong1 = colors.ansi.brightyellow
   colors.strong2 = colors.ansi.yellow
   colors.strong3 = colors.ansi.magenta
   colors.strong4 = colors.ansi.blue
 
-  colors.weak1 = colors.ansi.black
+  colors.success = colors.ansi.green
 
   opts.on_colors(colors)
   return colors
