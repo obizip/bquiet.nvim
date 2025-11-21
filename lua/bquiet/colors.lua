@@ -1,9 +1,78 @@
 local M = {}
 
-function M.setup(opts)
-  local colors = {}
+local light_colors = {
+  foreground = {
+    normal = "#000000",
 
-  colors.ansi = {
+    primary1 = "#7a3e9d",
+    primary2 = "#aa3731",
+    primary3 = "#325cc0",
+
+    secondary1 = "#696969",
+    secondary2 = "#888888",
+  },
+  background = {
+    normal = "#E2E2E9",
+
+    primary1 = "#A85A00",
+    primary2 = "#C0C0C0",
+
+    secondary1 = "#C0C0C0",
+    secondary2 = "#E0E0E0",
+    secondary3 = "#3b4261",
+  },
+  ansi = {
+    black = "#000000",
+    blue = "#325cc0",
+    brightyellow = "#D88300",
+    cyan = "#0083b2",
+    green = "#448c27",
+    magenta = "#7a3e9d",
+    red = "#aa3731",
+    white = "#f7f7f7",
+    yellow = "#cb9000",
+  },
+  git = {
+    add    = "#008B00",
+    change = "#0040FF",
+    delete = "#E60026",
+  },
+  diff = {
+    add = "#284918",
+    delete = "#B40600",
+    change = "#ec8013",
+    text = "#71aed7",
+  },
+  diag = {
+    error = "#d13e23",
+    warn = "#BC7500",
+    hint = "#325cc0",
+    info = "#278C00",
+  }
+}
+
+local dark_colors = {
+  foreground = {
+    normal = "#EEEEEE",
+
+    primary1 = "#cc8bc9",
+    primary2 = "#bdbd6c",
+    primary3 = "#e2eeee",
+
+    secondary1 = "#C0C0C0",
+    secondary2 = "#999999",
+    secondary3 = "#3b4261",
+  },
+  background = {
+    normal = "#0e1415",
+
+    primary1 = "#cd974b",
+    primary2 = "#354c50",
+
+    secondary1 = "#182325",
+    secondary2 = "#162022",
+  },
+  ansi = {
     black = "#333333",
     blue = "#71aed7",
     brightyellow = "#dfdf8e",
@@ -13,57 +82,30 @@ function M.setup(opts)
     red = "#c33c33",
     white = "#cecece",
     yellow = "#cd974b",
-  }
-
-  colors.foreground = {
-    normal = "#EEEEEE",
-
-    primary1 = "#cc8bc9",
-    primary2 = "#dfdf8e",
-    primary3 = "#e2eeee",
-
-    secondary1 = "#C0C0C0",
-    secondary2 = "#999999",
-    secondary3 = "#3b4261",
-    secondary4 = "#708b8d",
-  }
-
-  colors.background = {
-    normal = "#0e1415",
-
-    primary1 = "#cd974b",
-    primary2 = "#354c50",
-
-    secondary1 = "#182325",
-    secondary2 = "#162022",
-  }
-
-  colors.none = "NONE"
-
-
-  colors.git = {
+  },
+  git = {
     add = "#449dab",
     change = "#6183bb",
     delete = "#914c54",
-  }
-
-  colors.diff = {
+  },
+  diff = {
     add = "#6abf40",
     delete = "#d2322d",
     change = "#ec8013",
-    text = colors.ansi.blue,
-  }
-
-  colors.diag = {
+    text = "#71aed7",
+  },
+  diag = {
     error = "#d13e23",
     warn = "#f4b371",
     hint = "#8ebeec",
     info = "#88cc66",
   }
+}
 
-  --
-  --
-  --
+function M.setup(opts)
+  local colors = opts.style == "light" and light_colors or dark_colors
+
+  colors.none = "NONE"
 
   colors.type = colors.foreground.secondary1
   colors.operator = colors.foreground.primary3

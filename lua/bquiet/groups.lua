@@ -38,7 +38,7 @@ function M.get(c, opts)
     CursorLineNr                = { fg = c.strong1, bold = true },
     LineNrAbove                 = { fg = c.fg_gutter },
     LineNrBelow                 = { fg = c.fg_gutter },
-    MatchParen                  = { fg = c.strong1, bold = true },
+    MatchParen                  = { fg = c.strong1, bg = c.bg_visual, bold = true },
     ModeMsg                     = { fg = c.fg, bold = true },
     MsgAren                     = { fg = c.fg },
     MoreMsg                     = { fg = c.strong4 },
@@ -59,7 +59,7 @@ function M.get(c, opts)
     QuickFixLine                = { bg = c.bg_visual, bold = true },
     Repeat                      = { fg = c.keyword },
     Search                      = { bg = c.bg_search },
-    IncSearch                   = { bg = c.strong1, fg = c.bg },
+    IncSearch                   = { fg = c.bg, bg = c.active },
     CurSearch                   = "IncSearch",
     SpecialKey                  = { fg = c.weak1 },
     SpellBad                    = { sp = c.diag.error, undercurl = true },
@@ -152,6 +152,11 @@ function M.get(c, opts)
     --
     -- Plugins
     --
+
+    --- Gitsigns
+    GitSignsAdd                 = { fg = c.git.add },
+    GitSignsChange              = { fg = c.git.change },
+    GitSignsDelete              = { fg = c.git.delete },
 
     -- Treesitter
     ["@type"]                   = "Type",
