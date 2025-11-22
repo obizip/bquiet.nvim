@@ -90,7 +90,7 @@ function M.get(c, opts)
     Function                    = {},
     Identifier                  = {},
     Italic                      = { italic = true, fg = c.fg },
-    Keyword                     = { fg = c.keyword, italic = true },
+    Keyword                     = { fg = c.keyword, italic = true, bold = false },
     Label                       = { fg = c.keyword },
     Operator                    = { fg = c.operator },
     PreProc                     = {},
@@ -160,6 +160,7 @@ function M.get(c, opts)
 
     -- Treesitter
     ["@type"]                   = "Type",
+    ["@variable"]               = "Normal",
     ["@type.builtin"]           = "Type",
 
     -- Telescope

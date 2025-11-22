@@ -4,16 +4,17 @@ local light_colors = {
   foreground = {
     normal = "#000000",
 
-    primary1 = "#7a3e9d",
+    primary1 = "#552255",
     primary2 = "#aa3731",
     primary3 = "#325cc0",
+    primary4 = "#274420",
 
-    secondary1 = "#696969",
-    secondary2 = "#888888",
+    secondary1 = "#222255",
+    secondary2 = "#606060",
     secondary3 = "#a0a0a0",
   },
   background = {
-    normal = "#f2f2fa",
+    normal = "#f6f6f7",
 
     primary1 = "#A85A00",
     primary2 = "#C0C0C0",
@@ -59,6 +60,7 @@ local dark_colors = {
     primary1 = "#cc8bc9",
     primary2 = "#bdbd6c",
     primary3 = "#e2eeee",
+    primary4 = "#C0C0C0",
 
     secondary1 = "#C0C0C0",
     secondary2 = "#999999",
