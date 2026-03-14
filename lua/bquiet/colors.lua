@@ -110,7 +110,7 @@ function M.setup(opts)
 
   colors.none = "NONE"
 
-  colors.type = colors.foreground.secondary1
+  colors.type = colors.foreground.normal
   colors.operator = colors.foreground.primary3
   colors.constant = colors.foreground.primary1
   colors.comment = colors.foreground.primary2
