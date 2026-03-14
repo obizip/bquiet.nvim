@@ -34,7 +34,7 @@ function M.get(c, opts)
     FoldColumn                  = { bg = opts.transparent and c.none or c.bg, fg = c.comment },
     SignColumn                  = { bg = opts.transparent and c.none or c.bg, fg = c.fg_gutter },
     Substitute                  = { bg = c.bg_visual },
-    LineNr                      = { fg = c.fg_gutter },
+    LineNr                      = { fg = c.delimiter },
     CursorLineNr                = { fg = c.strong1, bold = true },
     LineNrAbove                 = { fg = c.fg_gutter },
     LineNrBelow                 = { fg = c.fg_gutter },
