@@ -253,7 +253,6 @@ function M.get(c, opts)
     GitSignsAdd = "Added",
     GitSignsChange = "Changed",
     GitSignsDelete = "Removed",
-    TelescopeMatching = "Special",
     ["@type"] = "Type",
     ["@type.builtin"] = "Type",
     ["@variable"] = "Identifier",
@@ -283,6 +282,11 @@ function M.get(c, opts)
   highlights.Italic = { fg = c.fg0, italic = true }
   highlights.LspInlayHint = { fg = c.fg1, bg = c.bg1 }
   highlights.DiagnosticUnnecessary = { fg = c.fg1 }
+
+  -- A selection foreground would override matching characters on the same row.
+  highlights.TelescopeSelection = { bg = c.bg2 }
+  highlights.TelescopeSelectionCaret = { fg = c.accent_light, bg = c.bg2, bold = true }
+  highlights.TelescopeMatching = { fg = c.accent, bold = true }
 
   for _, severity in ipairs({ "Error", "Warn", "Info", "Hint" }) do
     local color = c.diag[severity:lower()]
