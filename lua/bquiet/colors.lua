@@ -2,115 +2,106 @@ local M = {}
 
 local light_colors = {
   foreground = {
-    normal = "#000000",
-
-    primary1 = "#552255",
-    primary2 = "#aa3731",
-    primary3 = "#325cc0",
-    primary4 = "#274420",
-
-    secondary1 = "#222255",
-    secondary2 = "#606060",
-    secondary3 = "#a0a0a0",
+    normal = "#282D35",
+    primary1 = "#2D716C",
+    primary2 = "#357A74",
+    primary3 = "#357A74",
+    primary4 = "#282D35",
+    secondary1 = "#59616D",
+    secondary2 = "#59616D",
+    secondary3 = "#59616D",
   },
   background = {
-    normal = "#f6f6f7",
-
-    primary1 = "#A85A00",
-    primary2 = "#C0C0C0",
-
-    secondary1 = "#C0C0C0",
-    secondary2 = "#E0E0E0",
-    secondary3 = "#3b4261",
+    normal = "#F6F7F9",
+    primary1 = "#2D716C",
+    primary2 = "#DDE2E8",
+    secondary1 = "#ECEFF2",
+    secondary2 = "#DDE2E8",
   },
   ansi = {
-    black = "#000000",
-    blue = "#325cc0",
-    brightyellow = "#D88300",
-    cyan = "#0083b2",
-    green = "#448c27",
-    magenta = "#7a3e9d",
-    red = "#aa3731",
-    white = "#f7f7f7",
-    yellow = "#cb9000",
+    black = "#F6F7F9",
+    blue = "#2D716C",
+    brightyellow = "#357A74",
+    cyan = "#2D716C",
+    green = "#235B57",
+    magenta = "#357A74",
+    red = "#59616D",
+    white = "#282D35",
+    yellow = "#2D716C",
   },
   git = {
-    add    = "#008B00",
-    change = "#0040FF",
-    delete = "#E60026",
+    add = "#2D716C",
+    change = "#235B57",
+    delete = "#59616D",
   },
   diff = {
-    add = "#284918",
-    delete = "#B40600",
-    change = "#ec8013",
-    text = "#71aed7",
+    add = "#235B57",
+    delete = "#59616D",
+    change = "#59616D",
+    text = "#2D716C",
   },
   diag = {
-    error = "#d13e23",
-    warn = "#BC7500",
-    hint = "#325cc0",
-    info = "#278C00",
-  }
+    error = "#59616D",
+    warn = "#59616D",
+    hint = "#357A74",
+    info = "#2D716C",
+  },
 }
 
 local dark_colors = {
   foreground = {
-    normal = "#EEEEEE",
-
-    primary1 = "#cc8bc9",
-    primary2 = "#bdbd6c",
-    primary3 = "#e2eeee",
-    primary4 = "#C0C0C0",
-
-    secondary1 = "#C0C0C0",
-    secondary2 = "#999999",
-    secondary3 = "#162022",
+    normal = "#D8DCE2",
+    primary1 = "#55A7A2",
+    primary2 = "#7CC7C1",
+    primary3 = "#7CC7C1",
+    primary4 = "#D8DCE2",
+    secondary1 = "#AAB1BB",
+    secondary2 = "#AAB1BB",
+    secondary3 = "#AAB1BB",
   },
   background = {
-    normal = "#0e1415",
-
-    primary1 = "#cd974b",
-    primary2 = "#354c50",
-
-    secondary1 = "#182325",
-    secondary2 = "#162022",
+    normal = "#16181D",
+    primary1 = "#55A7A2",
+    primary2 = "#292D35",
+    secondary1 = "#1D2026",
+    secondary2 = "#292D35",
   },
   ansi = {
-    black = "#333333",
-    blue = "#71aed7",
-    brightyellow = "#dfdf8e",
-    cyan = "#47bea9",
-    green = "#95cb82",
-    magenta = "#cc8bc9",
-    red = "#c33c33",
-    white = "#cecece",
-    yellow = "#cd974b",
+    black = "#16181D",
+    blue = "#55A7A2",
+    brightyellow = "#7CC7C1",
+    cyan = "#55A7A2",
+    green = "#387D7A",
+    magenta = "#7CC7C1",
+    red = "#AAB1BB",
+    white = "#D8DCE2",
+    yellow = "#55A7A2",
   },
   git = {
-    add = "#449dab",
-    change = "#6183bb",
-    delete = "#914c54",
+    add = "#55A7A2",
+    change = "#387D7A",
+    delete = "#AAB1BB",
   },
   diff = {
-    add = "#6abf40",
-    delete = "#d2322d",
-    change = "#ec8013",
-    text = "#71aed7",
+    add = "#387D7A",
+    delete = "#AAB1BB",
+    change = "#AAB1BB",
+    text = "#55A7A2",
   },
   diag = {
-    error = "#d13e23",
-    warn = "#f4b371",
-    hint = "#8ebeec",
-    info = "#88cc66",
-  }
+    error = "#AAB1BB",
+    warn = "#AAB1BB",
+    hint = "#7CC7C1",
+    info = "#55A7A2",
+  },
 }
 
 function M.setup(opts)
-  local colors = opts.style == "light" and light_colors or dark_colors
+  local colors = vim.deepcopy(opts.style == "light" and light_colors or dark_colors)
 
   colors.none = "NONE"
 
-  colors.type = colors.foreground.secondary1
+  colors.type = colors.foreground.normal
   colors.operator = colors.foreground.primary3
   colors.constant = colors.foreground.primary1
   colors.comment = colors.foreground.primary2
@@ -122,15 +113,7 @@ function M.setup(opts)
   colors.fg = colors.foreground.normal
   colors.bg = colors.background.normal
 
-  colors.fg_popup = colors.bg
-  colors.bg_popup = colors.fg
-
-  colors.fg_border = colors.foreground.primary3
-  colors.fg_gutter = colors.foreground.secondary3
-
   colors.bg_visual = colors.background.primary2
-  colors.bg_search = colors.background.primary2
-  colors.bg_statusline = colors.background.secondary2
 
   colors.weak1 = colors.foreground.secondary3
 
@@ -140,6 +123,25 @@ function M.setup(opts)
   colors.strong4 = colors.ansi.blue
 
   colors.success = colors.ansi.green
+
+  -- Shared roles also keep Neovim integrations in the Vim theme's palette.
+  colors.bg0 = colors.bg
+  colors.bg1 = colors.background.secondary1
+  colors.bg2 = colors.background.primary2
+  colors.fg0 = colors.fg
+  colors.fg1 = colors.foreground.secondary2
+  colors.accent_dark = colors.git.change
+  colors.accent = colors.constant
+  colors.accent_light = colors.comment
+
+  colors.fg_popup = colors.fg1
+  colors.bg_popup = colors.bg1
+  colors.bg_float = colors.bg1
+  colors.fg_border = colors.fg1
+  colors.fg_gutter = colors.fg1
+  colors.fg_sidebar = colors.fg0
+  colors.bg_search = colors.accent
+  colors.bg_statusline = colors.bg2
 
   opts.on_colors(colors)
   return colors

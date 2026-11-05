@@ -1,4 +1,4 @@
-local opts = require("bquiet.config").get_options()
+local opts = vim.deepcopy(require("bquiet.config").get_options())
 opts.style = "dark"
 require("bquiet").setup(opts)
 require("bquiet").load()

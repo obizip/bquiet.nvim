@@ -1,171 +1,311 @@
 local M = {}
 
 function M.setup(colors, opts)
-  local hl_table = {}
-  for k, v in pairs(M.get(colors, opts)) do
-    hl_table[k] = v
-  end
-  opts.on_highlights(hl_table, colors)
-
-  return hl_table
+  local highlights = M.get(colors, opts)
+  opts.on_highlights(highlights, colors)
+  return highlights
 end
 
 function M.get(c, opts)
-  return {
-    Exception                   = { fg = c.keyword },
-    Comment                     = { fg = c.comment },
-    ColorColumn                 = {},
-    Conceal                     = {},
-    Cursor                      = { fg = c.bg, bg = c.fg },
-    lCursor                     = { fg = c.bg, bg = c.fg },
-    CursorIM                    = { fg = c.bg, bg = c.fg },
-    CursorColumn                = {},
-    CursorLine                  = {},
-    Directory                   = { fg = c.strong4 },
-    DiffAdd                     = { bg = c.diff.add },
-    DiffChange                  = { bg = c.diff.change },
-    DiffDelete                  = { bg = c.diff.delete },
-    DiffText                    = { bg = c.diff.text },
-    EndOfBuffer                 = { fg = c.delimiter },
-    ErrorMsg                    = { fg = c.diag.error },
-    VertSplit                   = { fg = c.fg_border },
-    WinSeparator                = { fg = c.fg_border, bold = true },
-    Folded                      = { fg = c.strong4, bg = c.fg_gutter },
-    FoldColumn                  = { bg = opts.transparent and c.none or c.bg, fg = c.comment },
-    SignColumn                  = { bg = opts.transparent and c.none or c.bg, fg = c.fg_gutter },
-    Substitute                  = { bg = c.bg_visual },
-    LineNr                      = { fg = c.fg_gutter },
-    CursorLineNr                = { fg = c.strong1, bold = true },
-    LineNrAbove                 = { fg = c.fg_gutter },
-    LineNrBelow                 = { fg = c.fg_gutter },
-    MatchParen                  = { fg = c.strong1, bg = c.bg_visual, bold = true },
-    ModeMsg                     = { fg = c.fg, bold = true },
-    MsgAren                     = { fg = c.fg },
-    MoreMsg                     = { fg = c.strong4 },
-    NonText                     = { fg = c.weak1 },
-    Normal                      = { fg = c.fg, bg = opts.transparent and c.none or c.bg },
-    NormalNC                    = {},
-    NormalSB                    = {},
-    NormalFloat                 = {},
-    FloatBorder                 = { fg = c.fg_border },
-    FloatTitle                  = {},
-    Pmenu                       = {},
-    -- PmenuMatch                  = { bg = c.bg_popup, fg = c.strong4 },
-    PmenuSel                    = { fg = c.bg, bg = c.active },
-    PmenuMatchSel               = { fg = c.bg, bg = c.active },
-    PmenuSbar                   = { bg = c.bg_popup },
-    PmenuThumb                  = { bg = c.fg_gutter },
-    Question                    = { fg = c.strong4 },
-    QuickFixLine                = { bg = c.bg_visual, bold = true },
-    Repeat                      = { fg = c.keyword },
-    Search                      = { bg = c.bg_search },
-    IncSearch                   = { fg = c.bg, bg = c.active },
-    CurSearch                   = "IncSearch",
-    SpecialKey                  = { fg = c.weak1 },
-    SpellBad                    = { sp = c.diag.error, undercurl = true },
-    SpellCap                    = { sp = c.diag.warn, undercurl = true },
-    SpellLocal                  = { sp = c.diag.info, undercurl = true },
-    SpellRare                   = { sp = c.diag.hint, undercurl = true },
-    StatusLine                  = { fg = c.fg_sidebar, bg = c.bg_statusline },
-    StatusLineNC                = { fg = c.fg_gutter, bg = c.bg_statusline },
-    TabLine                     = { bg = c.bg_statusline, fg = c.fg_gutter },
-    TabLineFill                 = { bg = opts.transparent and c.none or c.weak1 },
-    TabLineSel                  = { fg = c.weak1, bg = c.strong4 },
-    Title                       = { fg = c.strong4, bold = true },
-    Visual                      = { bg = c.bg_visual },
-    VisualNOS                   = { bg = c.bg_visual },
-    warnMsg                     = { fg = c.diag.warn },
-    Whitespace                  = { fg = c.fg_gutter },
-    WildMenu                    = { bg = c.bg_visual },
-    WinBar                      = "StatusLine",
-    WinBarNC                    = "StatusLineNC",
+  local bg = opts.transparent and c.none or c.bg0
+  local highlights = {
 
-    Bold                        = { bold = true, fg = c.fg },
-    Character                   = { fg = c.constant },
-    Constant                    = { fg = c.constant },
-    Conditional                 = { fg = c.keyword },
-    Debug                       = { fg = c.strong1 },
-    Delimiter                   = { fg = c.delimiter },
-    Error                       = { fg = c.diag.error },
-    Function                    = {},
-    Identifier                  = {},
-    Italic                      = { italic = true, fg = c.fg },
-    Keyword                     = { fg = c.keyword, italic = true, bold = false },
-    Label                       = { fg = c.keyword },
-    Operator                    = { fg = c.operator },
-    PreProc                     = {},
-    Include                     = { fg = c.keyword },
-    Define                      = { fg = c.keyword },
-    PreCondit                   = { fg = c.keyword },
-    Special                     = {},
-    Statement                   = {},
-    String                      = { fg = c.constant },
-    Todo                        = { bg = c.strong2, fg = c.bg },
-    Type                        = { fg = c.type, bold = true },
-    Underlined                  = { underline = true },
-    debugBreakpoint             = { fg = c.diag.info },
-    debugPC                     = {},
-    dosIniLabel                 = "@property",
-    helpCommand                 = { bg = c.weak1, fg = c.strong4 },
-    htmlH1                      = { fg = c.strong3, bold = true },
-    htmlH2                      = { fg = c.strong4, bold = true },
-    qfFileName                  = { fg = c.strong4 },
-    qfLineNr                    = { fg = c.weak1 },
+    -- Core
+    Normal = { fg = c.fg0, bg = bg },
+    Cursor = { fg = c.bg0, bg = c.fg0 },
+    CursorLine = { bg = c.bg1 },
+    CursorColumn = { bg = c.bg1 },
+    ColorColumn = { bg = c.bg2 },
 
-    LspReferenceText            = { bg = c.fg_gutter },
-    LspReferenceRead            = { bg = c.fg_gutter },
-    LspReferenceWrite           = { bg = c.fg_gutter },
-    LspSignatureActiveParameter = { bg = c.bg_visual, bold = true },
-    LspCodeLens                 = { fg = c.comment },
-    LspInlayHint                = { bg = c.strong4, fg = c.weak1 },
-    LspInfoBorder               = { fg = c.fg_popup, bg = c.bg_float },
-    ComplHint                   = { fg = c.weak1 },
+    -- Line numbers
+    LineNr = { fg = c.fg1, bg = bg },
+    CursorLineNr = { fg = c.fg0, bg = c.bg1, bold = true },
 
-    DiagnosticError             = { fg = c.diag.error },
-    DiagnosticWarn              = { fg = c.diag.warn },
-    DiagnosticInfo              = { fg = c.diag.info },
-    DiagnosticHint              = { fg = c.diag.hint },
-    DiagnosticUnnecessary       = {},
-    DiagnosticVirtualTextError  = { fg = c.diag.error },
-    DiagnosticVirtualTextWarn   = { fg = c.diag.warn },
-    DiagnosticVirtualTextInfo   = { fg = c.diag.info },
-    DiagnosticVirtualTextHint   = { fg = c.diag.hint },
-    DiagnosticUnderlineError    = { undercurl = true, sp = c.diag.error },
-    DiagnosticUnderlineWarn     = { undercurl = true, sp = c.diag.warn },
-    DiagnosticUnderlineInfo     = { undercurl = true, sp = c.diag.info },
-    DiagnosticUnderlineHint     = { undercurl = true, sp = c.diag.hint },
+    -- Selection / Search
+    Visual = { fg = c.fg0, bg = c.bg2 },
+    VisualNOS = { fg = c.fg1, bg = c.bg2 },
+    Search = { fg = c.bg0, bg = c.accent },
+    IncSearch = { fg = c.bg0, bg = c.accent_light, bold = true },
+    CurSearch = { fg = c.bg0, bg = c.accent_light, bold = true },
+    Substitute = { fg = c.bg0, bg = c.accent, bold = true },
+    MatchParen = { fg = c.fg0, bg = c.bg2, bold = true, underline = true },
 
-    healthError                 = { fg = c.diag.error },
-    healthSuccess               = { fg = c.success },
-    healthwarn                  = { fg = c.diag.warn },
+    -- Semantic values
+    Comment = { fg = c.accent_light, italic = true },
+    Constant = { fg = c.accent },
+    Number = { fg = c.accent },
+    String = { fg = c.accent },
 
-    diffAdded                   = { bg = c.diff.add, fg = c.git.add },
-    diffRemoved                 = { bg = c.diff.delete, fg = c.git.delete },
-    diffChanged                 = { bg = c.diff.change, fg = c.git.change },
-    diffOldFile                 = { fg = c.strong4, bg = c.diff.delete },
-    diffNewFile                 = { fg = c.strong4, bg = c.diff.add },
-    diffFile                    = { fg = c.strong4 },
-    diffLine                    = { fg = c.comment },
-    diffIndexLine               = { fg = c.strong3 },
-    helpExample                 = { fg = c.comment },
+    -- Syntax structure
+    Identifier = { fg = c.fg0 },
+    Function = { fg = c.fg0 },
+    Delimiter = { fg = c.fg1 },
+    Statement = { fg = c.fg1 },
+    Operator = { fg = c.accent_light },
+    PreProc = { fg = c.fg1 },
+    Type = { fg = c.fg0 },
+    TypeDef = { fg = c.fg0 },
+    StorageClass = { fg = c.fg1 },
+    Structure = { fg = c.fg1 },
+    Label = { fg = c.fg1 },
 
-    --
-    -- Plugins
-    --
+    -- Special values
+    Special = { fg = c.accent },
+    Underlined = { fg = c.accent, underline = true },
+    Todo = { fg = c.accent_light, bold = true },
 
-    --- Gitsigns
-    GitSignsAdd                 = { fg = c.git.add },
-    GitSignsChange              = { fg = c.git.change },
-    GitSignsDelete              = { fg = c.git.delete },
+    -- Low-priority UI
+    Ignore = { fg = c.fg1 },
+    SpecialKey = { fg = c.fg1 },
+    NonText = { fg = c.fg1 },
+    Whitespace = { fg = c.fg1 },
+    EndOfBuffer = { fg = c.fg1 },
 
-    -- Treesitter
-    ["@type"]                   = "Type",
-    ["@variable"]               = "Normal",
-    ["@type.builtin"]           = "Type",
+    -- Folds
+    Folded = { fg = c.fg1, bg = c.bg1 },
+    FoldColumn = { fg = c.fg1, bg = bg },
 
-    -- Telescope
-    TelescopeMatching           = { fg = c.active }
+    -- Sign column
+    SignColumn = { bg = bg },
+
+    -- Messages
+    Title = { fg = c.fg0, bold = true },
+    Directory = { fg = c.fg1 },
+    ModeMsg = { fg = c.fg0, bold = true },
+    MoreMsg = { fg = c.fg1 },
+    Question = { fg = c.accent },
+    MsgArea = { fg = c.fg0, bg = bg },
+    MsgSeparator = { fg = c.fg1, bg = bg },
+    Error = { underline = true },
+    WarningMsg = { underline = true },
+
+    -- Diagnostics
+    DiagnosticUnderlineError = { underline = true },
+    DiagnosticUnderlineWarn = { underline = true },
+    DiagnosticUnderlineInfo = { underline = true },
+    DiagnosticUnderlineHint = { underline = true },
+
+    -- Spell checking
+    SpellBad = { undercurl = true },
+    SpellCap = { undercurl = true },
+    SpellLocal = { undercurl = true },
+    SpellRare = { undercurl = true },
+
+    -- Popup menu
+    Pmenu = { fg = c.fg1, bg = c.bg1 },
+    PmenuSel = { fg = c.bg0, bg = c.accent, bold = true },
+    PmenuSbar = { bg = c.bg2 },
+    PmenuThumb = { bg = c.fg1 },
+    PmenuMatch = { fg = c.accent, bg = c.bg1, bold = true },
+    PmenuMatchSel = { fg = c.bg0, bg = c.accent_light, bold = true },
+
+    -- Floating windows
+    NormalFloat = { fg = c.fg0, bg = c.bg1 },
+    FloatBorder = { fg = c.fg1, bg = c.bg1 },
+
+    -- Status line
+    StatusLine = { fg = c.fg0, bg = c.bg2, bold = true },
+    StatusLineNC = { fg = c.fg1, bg = c.bg1 },
+
+    -- Tabs
+    TabLine = { fg = c.fg1, bg = c.bg1 },
+    TabLineFill = { fg = c.fg1, bg = c.bg1 },
+    TabLineSel = { fg = c.fg0, bg = c.bg2, bold = true },
+
+    -- Window separators
+    VertSplit = { fg = c.bg2, bg = bg },
+    WinSeparator = { fg = c.bg2, bg = bg },
+
+    -- Wild menu
+    WildMenu = { fg = c.bg0, bg = c.fg0, bold = true },
+
+    -- Quickfix
+    QuickFixLine = { fg = c.fg0, bg = c.bg2, bold = true },
+
+    -- Diff
+    DiffAdd = { fg = c.accent_dark, bg = c.bg1 },
+    DiffChange = { fg = c.fg1, bg = c.bg2 },
+    DiffDelete = { fg = c.fg1, bg = c.bg1 },
+    DiffText = { fg = c.accent, bg = c.bg2, bold = true },
+
+    -- Generic added / changed / removed
+    Added = { fg = c.accent },
+    Changed = { fg = c.accent_dark },
+    Removed = { fg = c.fg1 },
+
+    -- Language-specific
+    cucumberTags = { fg = c.accent },
+    htmlTagN = { fg = c.fg1 },
+    rubySymbol = { fg = c.accent },
+
+    -- HTML
+    htmlTag = { fg = c.fg1 },
+    htmlEndTag = { fg = c.fg1 },
+    htmlTagName = { fg = c.fg0 },
+    htmlArg = { fg = c.fg1 },
+    htmlString = { fg = c.accent },
+    htmlComment = { fg = c.accent_light, italic = true },
+    htmlSpecialChar = { fg = c.accent },
+
+    -- CSS
+    cssSelectorOp = { fg = c.accent_light },
+    cssSelectorOp2 = { fg = c.accent_light },
+    cssClassName = { fg = c.fg0 },
+    cssIdentifier = { fg = c.fg0 },
+    cssTagName = { fg = c.fg0 },
+    cssProp = { fg = c.fg1 },
+    cssAttr = { fg = c.fg1 },
+    cssStringQ = { fg = c.accent },
+    cssStringQQ = { fg = c.accent },
+    cssColor = { fg = c.accent },
+    cssValueNumber = { fg = c.accent },
+    cssValueLength = { fg = c.accent },
+    cssValueInteger = { fg = c.accent },
+    cssComment = { fg = c.accent_light, italic = true },
+    cssImportant = { fg = c.accent_light, bold = true },
+
+    -- Markdown
+    markdownH1 = { fg = c.fg0, bold = true },
+    markdownH2 = { fg = c.fg0, bold = true },
+    markdownH3 = { fg = c.fg0, bold = true },
+    markdownH4 = { fg = c.fg1, bold = true },
+    markdownH5 = { fg = c.fg1, bold = true },
+    markdownH6 = { fg = c.fg1, bold = true },
+    markdownHeadingDelimiter = { fg = c.accent_light, bold = true },
+    markdownListMarker = { fg = c.accent_light },
+    markdownOrderedListMarker = { fg = c.accent_light },
+    markdownBlockquote = { fg = c.accent_light, italic = true },
+    markdownBold = { fg = c.fg0, bold = true },
+    markdownItalic = { fg = c.fg1, italic = true },
+    markdownBoldItalic = { fg = c.fg0, bold = true, italic = true },
+    markdownCode = { fg = c.accent },
+    markdownCodeBlock = { fg = c.accent },
+    markdownCodeDelimiter = { fg = c.accent_light },
+    markdownLinkText = { fg = c.accent, underline = true },
+    markdownUrl = { fg = c.accent, underline = true },
+    markdownLinkDelimiter = { fg = c.accent_light },
+    markdownLinkTextDelimiter = { fg = c.accent_light },
+    markdownRule = { fg = c.accent_light },
+    markdownEscape = { fg = c.accent_light },
+    markdownError = { underline = true },
+    markdownId = { fg = c.accent },
+    markdownIdDeclaration = { fg = c.accent },
+    markdownAutomaticLink = { fg = c.accent, underline = true },
+    markdownUrlTitle = { fg = c.accent },
+    markdownFootnote = { fg = c.accent_light },
+    markdownFootnoteDefinition = { fg = c.accent_light },
   }
+
+  -- Neovim UI and integrations use the same semantic roles.
+  local links = {
+    lCursor = "Cursor",
+    CursorIM = "Cursor",
+    NormalNC = "Normal",
+    NormalSB = "Normal",
+    FloatTitle = "Title",
+    ErrorMsg = "Error",
+    LineNrAbove = "LineNr",
+    LineNrBelow = "LineNr",
+    WinBar = "StatusLine",
+    WinBarNC = "StatusLineNC",
+    Character = "Constant",
+    Boolean = "Constant",
+    Float = "Number",
+    Conditional = "Statement",
+    Repeat = "Statement",
+    Keyword = "Statement",
+    Exception = "Statement",
+    Include = "PreProc",
+    Define = "PreProc",
+    Macro = "PreProc",
+    PreCondit = "PreProc",
+    SpecialChar = "Special",
+    Tag = "Special",
+    SpecialComment = "Comment",
+    Debug = "Special",
+    debugBreakpoint = "Special",
+    debugPC = "CursorLine",
+    dosIniLabel = "Identifier",
+    helpCommand = "Special",
+    helpExample = "Comment",
+    htmlH1 = "markdownH1",
+    htmlH2 = "markdownH2",
+    qfFileName = "Directory",
+    qfLineNr = "LineNr",
+    LspReferenceText = "Visual",
+    LspReferenceRead = "Visual",
+    LspReferenceWrite = "Visual",
+    LspSignatureActiveParameter = "MatchParen",
+    LspCodeLens = "Comment",
+    LspInfoBorder = "FloatBorder",
+    ComplHint = "Comment",
+    healthError = "DiagnosticError",
+    healthSuccess = "Added",
+    healthWarn = "DiagnosticWarn",
+    diffAdded = "Added",
+    diffRemoved = "Removed",
+    diffChanged = "Changed",
+    diffOldFile = "Removed",
+    diffNewFile = "Added",
+    diffFile = "Directory",
+    diffLine = "Comment",
+    diffIndexLine = "Special",
+    GitSignsAdd = "Added",
+    GitSignsChange = "Changed",
+    GitSignsDelete = "Removed",
+    TelescopeMatching = "Special",
+    ["@type"] = "Type",
+    ["@type.builtin"] = "Type",
+    ["@variable"] = "Identifier",
+    ["@comment"] = "Comment",
+    ["@operator"] = "Operator",
+    ["@markup.heading.1"] = "markdownH1",
+    ["@markup.heading.2"] = "markdownH2",
+    ["@markup.heading.3"] = "markdownH3",
+    ["@markup.heading.4"] = "markdownH4",
+    ["@markup.heading.5"] = "markdownH5",
+    ["@markup.heading.6"] = "markdownH6",
+    ["@markup.heading"] = "Title",
+    ["@markup.strong"] = "markdownBold",
+    ["@markup.italic"] = "markdownItalic",
+    ["@markup.quote"] = "markdownBlockquote",
+    ["@markup.raw"] = "markdownCode",
+    ["@markup.link"] = "markdownLinkText",
+    ["@markup.link.label"] = "markdownLinkText",
+    ["@markup.link.url"] = "markdownUrl",
+    ["@markup.list"] = "markdownListMarker",
+  }
+  for group, target in pairs(links) do
+    highlights[group] = { link = target }
+  end
+
+  highlights.Bold = { fg = c.fg0, bold = true }
+  highlights.Italic = { fg = c.fg0, italic = true }
+  highlights.LspInlayHint = { fg = c.fg1, bg = c.bg1 }
+  highlights.DiagnosticUnnecessary = { fg = c.fg1 }
+
+  for _, severity in ipairs({ "Error", "Warn", "Info", "Hint" }) do
+    local color = c.diag[severity:lower()]
+    highlights["Diagnostic" .. severity] = { fg = color }
+    highlights["DiagnosticVirtualText" .. severity] = { fg = color }
+  end
+
+  for group, style in pairs({
+    Comment = opts.styles.comments,
+    Keyword = opts.styles.keywords,
+    Function = opts.styles.functions,
+    Identifier = opts.styles.variables,
+  }) do
+    if next(style) then
+      local highlight = highlights[group]
+      if highlight.link then
+        highlight = vim.deepcopy(highlights[highlight.link])
+      end
+      highlights[group] = vim.tbl_extend("force", highlight, style)
+    end
+  end
+
+  return highlights
 end
 
 return M

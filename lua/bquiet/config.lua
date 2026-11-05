@@ -1,7 +1,7 @@
 local M = {}
 
 M.defaults = {
-  style = "light",
+  style = "dark",
   transparent = false,
   styles = {
     comments = {},
